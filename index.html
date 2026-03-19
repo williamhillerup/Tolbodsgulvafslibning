@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Tolbods Gulvafslibning – Professionel gulvafslibning, lakering og lægning i hele Danmark. Med base i Roslev. 5 stjerner på Google. Ring 52 27 12 71." />
+  <title>Tolbods Gulvafslibning – Hele Danmark</title>
+  <style>
+    /* ─── RESET & BASE ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    :root {
+      --brown:   #1A2C3D;
+      --brown-l: #2D4259;
+      --sand:    #F2F7FA;
+      --sand-d:  #E2ECF2;
+      --gold:    #00C5E3;
+      --gold-d:  #009BB5;
+      --text:    #1A2C3D;
+      --text-m:  #4A6070;
+      --white:   #FFFFFF;
+      --radius:  10px;
+      --shadow:  0 2px 8px rgba(0,150,180,.08), 0 8px 32px rgba(0,150,180,.12);
+      --shadow-h:0 4px 16px rgba(0,150,180,.14), 0 16px 48px rgba(0,150,180,.18);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--sand);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* Display font feel via letter-spacing on headings */
+    h1, h2, h3 { line-height: 1.2; letter-spacing: -0.03em; font-weight: 800; color: var(--brown); }
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+    h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); }
+    h3 { font-size: 1.15rem; font-weight: 700; }
+
+    p { color: var(--text-m); line-height: 1.75; }
+
+    a { color: inherit; text-decoration: none; }
+
+    img { max-width: 100%; display: block; }
+
+    section { padding: 90px 20px; }
+
+    .container { max-width: 1140px; margin: 0 auto; width: 100%; }
+
+    /* ─── BUTTONS ─── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 6px; font-size: .95rem;
+      font-weight: 700; cursor: pointer; border: none; text-align: center;
+      transition: background 0.22s cubic-bezier(.34,1.56,.64,1),
+                  transform  0.22s cubic-bezier(.34,1.56,.64,1),
+                  box-shadow 0.22s ease;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .btn:hover   { transform: translateY(-2px); }
+    .btn:active  { transform: translateY(0); }
+    .btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--brown);
+      box-shadow: 0 2px 8px rgba(0,197,227,.35), 0 6px 20px rgba(0,197,227,.2);
+    }
+    .btn-primary:hover {
+      background: var(--gold-d);
+      box-shadow: 0 4px 16px rgba(0,197,227,.45), 0 12px 32px rgba(0,197,227,.25);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,.5);
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,.1);
+      border-color: var(--white);
+    }
+
+    .btn-brown {
+      background: var(--brown);
+      color: var(--white);
+      box-shadow: 0 2px 8px rgba(26,44,61,.3), 0 6px 20px rgba(26,44,61,.15);
+    }
+    .btn-brown:hover {
+      background: var(--brown-l);
+      box-shadow: 0 4px 16px rgba(26,44,61,.4), 0 12px 32px rgba(26,44,61,.2);
+    }
+
+    /* ─── STARS ─── */
+    .stars { color: var(--gold); letter-spacing: 2px; font-size: 1rem; }
+    .stars-lg { font-size: 1.3rem; }
+
+    /* ─── SECTION LABELS ─── */
+    .label {
+      display: inline-block;
+      font-size: .75rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    /* ─── FADE IN ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in.delay-1 { transition-delay: .1s; }
+    .fade-in.delay-2 { transition-delay: .2s; }
+    .fade-in.delay-3 { transition-delay: .3s; }
+    .fade-in.delay-4 { transition-delay: .4s; }
+    .fade-in.delay-5 { transition-delay: .5s; }
+
+    /* ══════════════════════════════════════════
+       NAVBAR
+    ══════════════════════════════════════════ */
+    .navbar {
+      position: sticky; top: 0; z-index: 1000;
+      background: var(--white);
+      box-shadow: 0 2px 12px rgba(26,44,61,.12);
+    }
+    .nav-inner {
+      max-width: 1140px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 20px; height: 100px;
+    }
+    .nav-logo {
+      display: flex; align-items: center;
+    }
+    .nav-logo img {
+      height: 88px; width: auto; display: block;
+    }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text); font-size: .88rem; font-weight: 600;
+      transition: color .2s ease;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 3px; }
+
+    .nav-phone {
+      color: var(--gold) !important; font-weight: 700 !important;
+    }
+
+    .nav-cta { margin-left: 8px; padding: 10px 20px !important; font-size: .85rem !important; }
+
+    /* Burger */
+    .burger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 6px;
+    }
+    .burger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--brown); border-radius: 2px;
+      transition: transform .25s ease, opacity .25s ease;
+    }
+    .burger:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 3px; }
+    .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile nav drawer */
+    .nav-drawer {
+      display: none; position: absolute; top: 100px; left: 0; right: 0;
+      background: var(--white); padding: 20px;
+      box-shadow: 0 8px 24px rgba(26,44,61,.12);
+      border-top: 1px solid var(--sand-d);
+    }
+    .nav-drawer.open { display: block; }
+    .nav-drawer ul { list-style: none; display: flex; flex-direction: column; gap: 0; }
+    .nav-drawer a {
+      display: block; color: var(--text); padding: 12px 0;
+      font-size: 1rem; font-weight: 600;
+      border-bottom: 1px solid var(--sand-d);
+      transition: color .2s ease, padding-left .2s ease;
+    }
+    .nav-drawer a:hover { color: var(--gold); padding-left: 6px; }
+    .nav-drawer .btn { width: 100%; margin-top: 16px; justify-content: center; }
+
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .burger   { display: flex; }
+    }
+
+    /* ══════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════ */
+    .hero {
+      position: relative; overflow: hidden;
+      min-height: 92vh; display: flex; align-items: center;
+      background: var(--brown) url('pexels-digitalbuggu-230776.jpg') center/cover no-repeat;
+      padding: 100px 20px;
+    }
+
+    /* Multi-layer radial gradients for depth */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to right, rgba(5,15,25,.85) 0%, rgba(5,15,25,.55) 60%, rgba(5,15,25,.3) 100%),
+        radial-gradient(ellipse 100% 100% at 50% 100%, rgba(5,15,25,.5) 0%, transparent 60%);
+    }
+
+    /* SVG noise grain texture */
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: .5;
+      pointer-events: none;
+    }
+
+    /* Decorative wood-plank lines */
+    .hero-planks {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 79px,
+        rgba(255,255,255,.025) 79px,
+        rgba(255,255,255,.025) 80px
+      );
+    }
+
+    /* 2-col hero layout */
+    .hero-inner {
+      position: relative; z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 48px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero-content {
+      min-width: 0;
+    }
+
+    /* Hero form card */
+    .hero-form-card {
+      background: rgba(255,255,255,.97);
+      border-radius: 12px;
+      padding: 32px 28px;
+      box-shadow:
+        0 4px 16px rgba(26,44,61,.25),
+        0 20px 60px rgba(26,44,61,.35);
+    }
+    .hero-form-card h3 {
+      color: var(--brown); font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+    .hero-form-card .form-sub {
+      font-size: .82rem; color: var(--text-m);
+      margin-bottom: 20px; line-height: 1.5;
+    }
+    .hero-form-card .form-group { margin-bottom: 14px; }
+    .hero-form-card .form-group label {
+      font-size: .75rem; font-weight: 700; letter-spacing: .05em;
+      text-transform: uppercase; color: var(--brown);
+      display: block; margin-bottom: 5px;
+    }
+    .hero-form-card .form-group input,
+    .hero-form-card .form-group select,
+    .hero-form-card .form-group textarea {
+      width: 100%; padding: 10px 13px;
+      border: 1.5px solid rgba(26,44,61,.18);
+      border-radius: 6px; font-size: .88rem;
+      background: var(--white); color: var(--text);
+      font-family: inherit;
+      transition: border-color .2s ease, box-shadow .2s ease;
+      appearance: none; -webkit-appearance: none;
+    }
+    .hero-form-card .form-group input:focus,
+    .hero-form-card .form-group select:focus,
+    .hero-form-card .form-group textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(0,197,227,.18);
+    }
+    .hero-form-card .form-group textarea { min-height: 80px; resize: vertical; }
+    .hero-form-card .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%233B2314' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 13px center;
+      padding-right: 36px; cursor: pointer;
+    }
+    .hero-form-card .btn-submit {
+      width: 100%; padding: 13px; justify-content: center;
+      font-size: .95rem;
+    }
+    .hero-form-card .form-note {
+      font-size: .72rem; color: var(--text-m);
+      text-align: center; margin-top: 8px;
+    }
+    .hero-form-card .form-success-mini {
+      display: none; text-align: center; padding: 20px 0;
+    }
+    .hero-form-card .form-success-mini svg { width: 44px; height: 44px; margin: 0 auto 10px; }
+    .hero-form-card .form-success-mini h4 { color: var(--brown); margin-bottom: 6px; }
+    .hero-form-card .form-success-mini p { font-size: .85rem; }
+
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 36px; }
+      .hero-form-card { max-width: 480px; }
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(0,197,227,.15); border: 1px solid rgba(0,197,227,.3);
+      padding: 8px 16px; border-radius: 100px; margin-bottom: 28px;
+    }
+    .hero-badge .stars { font-size: .85rem; }
+    .hero-badge span { font-size: .8rem; font-weight: 600; color: rgba(255,255,255,.8); }
+
+    .hero h1 { color: var(--white); margin-bottom: 20px; }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+
+    .hero-sub {
+      font-size: 1.15rem; color: rgba(255,255,255,.72);
+      max-width: 560px; margin-bottom: 40px; line-height: 1.7;
+    }
+
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 40px; }
+
+    .trust-row {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1);
+      padding: 12px 20px; border-radius: 8px; backdrop-filter: blur(4px);
+    }
+    .trust-row .stars-lg { line-height: 1; }
+    .trust-row p { color: rgba(255,255,255,.75); font-size: .85rem; margin: 0; line-height: 1.4; }
+    .trust-row p strong { color: var(--white); display: block; }
+
+    @media (max-width: 600px) {
+      .hero { min-height: auto; padding: 80px 20px 60px; }
+      .hero-ctas { flex-direction: column; }
+      .hero-ctas .btn { width: 100%; justify-content: center; }
+      .trust-row {
+        display: flex; flex-direction: row; flex-wrap: wrap;
+        width: 100%; gap: 10px;
+      }
+      .hero-badge { white-space: normal; }
+    }
+
+    @media (max-width: 480px) {
+      section { padding: 64px 16px; }
+      .cta-banner { padding: 60px 16px; }
+      .cta-banner .btns { flex-direction: column; }
+      .cta-banner .btns .btn { width: 100%; justify-content: center; }
+      .contact-info { padding: 28px 20px; }
+      .review-card { padding: 24px 20px; }
+      .service-card { padding: 28px 20px; }
+    }
+
+    /* ══════════════════════════════════════════
+       SERVICES
+    ══════════════════════════════════════════ */
+    .services { background: var(--white); }
+    .services .container { text-align: center; }
+    .services .section-header { margin-bottom: 56px; }
+    .services .section-header p { max-width: 520px; margin: 12px auto 0; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--sand);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      text-align: left;
+      box-shadow: 0 1px 4px rgba(26,44,61,.06), 0 4px 16px rgba(26,44,61,.08);
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1),
+                  box-shadow .25s ease;
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--gold);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .3s ease;
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-h); }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-icon {
+      width: 52px; height: 52px;
+      background: rgba(26,44,61,.08);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .service-icon svg { width: 26px; height: 26px; }
+
+    .service-card h3 { color: var(--brown); margin-bottom: 8px; }
+    .service-card p { font-size: .9rem; }
+
+    /* ══════════════════════════════════════════
+       PHOTO GALLERY
+    ══════════════════════════════════════════ */
+    .photo-gallery {
+      background: var(--white);
+      padding: 0;
+      overflow: hidden;
+    }
+    .photo-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      height: 200px;
+    }
+    .photo-gallery-grid figure {
+      margin: 0;
+      overflow: hidden;
+    }
+    .photo-gallery-grid img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.85) brightness(0.95);
+      transition: transform .6s ease, filter .6s ease;
+    }
+    .photo-gallery-grid figure:hover img {
+      transform: scale(1.04);
+      filter: saturate(1) brightness(1);
+    }
+    @media (max-width: 600px) {
+      .photo-gallery-grid { grid-template-columns: 1fr; height: auto; }
+      .photo-gallery-grid figure { height: 140px; }
+    }
+
+    /* ══════════════════════════════════════════
+       WHY US
+    ══════════════════════════════════════════ */
+    .whyus { background: var(--sand-d); }
+    .whyus .section-header { text-align: center; margin-bottom: 56px; }
+    .whyus .section-header p { max-width: 500px; margin: 12px auto 0; }
+
+    .usp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .usp-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      box-shadow: var(--shadow);
+      display: flex; flex-direction: column; gap: 14px;
+    }
+
+    .usp-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--brown); display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(26,44,61,.3);
+    }
+    .usp-icon svg { width: 22px; height: 22px; stroke: var(--white); }
+
+    .usp-card h3 { color: var(--brown); font-size: 1rem; margin: 0; }
+    .usp-card p  { font-size: .88rem; margin: 0; }
+
+    /* ══════════════════════════════════════════
+       REVIEWS
+    ══════════════════════════════════════════ */
+    .reviews { background: var(--white); }
+    .reviews .section-header { text-align: center; margin-bottom: 56px; }
+    .reviews .section-header p { max-width: 500px; margin: 12px auto 0; }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 24px; margin-bottom: 40px;
+    }
+
+    .review-card {
+      background: var(--sand);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      box-shadow: 0 2px 8px rgba(26,44,61,.07), 0 8px 24px rgba(26,44,61,.09);
+      display: flex; flex-direction: column; gap: 16px;
+      position: relative;
+    }
+    .review-card::before {
+      content: '\201C';
+      position: absolute; top: 16px; right: 24px;
+      font-size: 5rem; line-height: 1; color: rgba(0,197,227,.15);
+      font-family: Georgia, serif;
+    }
+
+    .review-header { display: flex; align-items: center; gap: 14px; }
+    .review-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--brown); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem; font-weight: 800; flex-shrink: 0;
+    }
+    .review-meta h4 { font-size: .95rem; font-weight: 700; color: var(--brown); margin-bottom: 2px; }
+    .review-meta .stars { font-size: .8rem; }
+
+    .review-text { font-size: .92rem; color: var(--text-m); line-height: 1.7; font-style: italic; }
+
+    .review-badges { display: flex; flex-wrap: wrap; gap: 6px; }
+    .badge {
+      font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      background: rgba(26,44,61,.07); color: var(--brown);
+      padding: 4px 10px; border-radius: 100px;
+    }
+
+    .reviews-footer { text-align: center; }
+    .google-link {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--sand-d); border: 1px solid rgba(26,44,61,.15);
+      padding: 14px 24px; border-radius: 8px; font-weight: 700;
+      color: var(--brown); font-size: .9rem;
+      transition: background .2s ease, box-shadow .2s ease, transform .2s ease;
+    }
+    .google-link:hover { background: var(--sand); box-shadow: var(--shadow); transform: translateY(-2px); }
+    .google-link:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+    .google-link .stars { font-size: .85rem; }
+
+    /* ══════════════════════════════════════════
+       ABOUT
+    ══════════════════════════════════════════ */
+    .about { background: var(--sand-d); }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center;
+    }
+    .about-text { }
+    .about-text .label { }
+    .about-text h2 { margin-bottom: 20px; }
+    .about-text p { margin-bottom: 16px; }
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .about-img {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-h);
+      position: relative;
+      aspect-ratio: 4/5;
+    }
+    .about-img img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      display: block;
+      transition: transform .5s cubic-bezier(.34,1.2,.64,1);
+    }
+    .about-img:hover img { transform: scale(1.03); }
+    /* subtle warm overlay for depth */
+    .about-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 55%,
+        rgba(26,44,61,.45) 100%
+      );
+      pointer-events: none;
+    }
+
+    @media (max-width: 760px) {
+      .about-inner { grid-template-columns: 1fr; gap: 32px; }
+      .about-img { min-height: 220px; order: -1; }
+    }
+
+    /* ══════════════════════════════════════════
+       CTA BANNER
+    ══════════════════════════════════════════ */
+    .cta-banner {
+      background: var(--brown); padding: 80px 20px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-banner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 80% at 80% 50%, rgba(0,197,227,.1) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 100% at 10% 50%, rgba(0,80,120,.5) 0%, transparent 60%);
+    }
+    .cta-banner::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 39px,
+        rgba(255,255,255,.02) 39px, rgba(255,255,255,.02) 40px
+      );
+    }
+    .cta-banner-inner { position: relative; z-index: 1; }
+    .cta-banner h2 { color: var(--white); margin-bottom: 12px; }
+    .cta-banner p { color: rgba(255,255,255,.7); font-size: 1.1rem; margin-bottom: 36px; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .cta-banner .btns { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+
+    /* ══════════════════════════════════════════
+       CONTACT
+    ══════════════════════════════════════════ */
+    .contact { background: var(--sand); }
+    .contact .section-header { margin-bottom: 48px; }
+    .contact .section-header p { max-width: 500px; }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 64px; align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    /* Form */
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block; font-size: .82rem; font-weight: 700;
+      color: var(--brown); margin-bottom: 7px; letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; padding: 13px 16px;
+      border: 2px solid rgba(26,44,61,.15);
+      border-radius: 6px; font-size: .95rem;
+      background: var(--white); color: var(--text);
+      font-family: inherit; line-height: 1.5;
+      transition: border-color .2s ease, box-shadow .2s ease;
+      appearance: none; -webkit-appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(0,197,227,.2);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%233B2314' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; cursor: pointer; }
+
+    .form-submit { width: 100%; padding: 16px; font-size: 1rem; justify-content: center; }
+
+    .form-note { font-size: .78rem; color: var(--text-m); margin-top: 10px; text-align: center; }
+
+    /* Contact info */
+    .contact-info {
+      background: var(--brown); border-radius: var(--radius);
+      padding: 40px 32px; color: var(--white);
+      box-shadow: 0 8px 32px rgba(26,44,61,.3);
+    }
+    .contact-info h3 { color: var(--white); margin-bottom: 28px; font-size: 1.2rem; }
+
+    .contact-detail {
+      display: flex; gap: 16px; align-items: flex-start;
+      margin-bottom: 24px;
+    }
+    .contact-detail:last-child { margin-bottom: 0; }
+
+    .detail-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: rgba(255,255,255,.1); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .detail-icon svg { width: 18px; height: 18px; stroke: var(--gold); }
+
+    .detail-text small {
+      display: block; font-size: .7rem; text-transform: uppercase;
+      letter-spacing: .1em; color: rgba(255,255,255,.5); margin-bottom: 3px;
+    }
+    .detail-text a, .detail-text span {
+      font-size: .95rem; font-weight: 600; color: var(--white);
+    }
+    .detail-text a { transition: color .2s ease; }
+    .detail-text a:hover { color: var(--gold); }
+    .detail-text a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+
+    .contact-info-divider {
+      border: none; border-top: 1px solid rgba(255,255,255,.1);
+      margin: 28px 0;
+    }
+
+    .contact-stars {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .contact-stars .stars { font-size: 1.1rem; }
+    .contact-stars span { font-size: .85rem; color: rgba(255,255,255,.7); }
+
+    /* ══════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════ */
+    footer {
+      background: var(--brown);
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .footer-inner { max-width: 1140px; margin: 0 auto; }
+    .footer-logo { margin-bottom: 16px; display: flex; justify-content: center; }
+    .footer-logo img { height: 56px; width: auto; background: var(--white); border-radius: 8px; padding: 6px 14px; }
+    .footer-meta { font-size: .82rem; color: rgba(255,255,255,.45); line-height: 1.8; }
+    .footer-meta a { color: var(--gold); transition: opacity .2s ease; }
+    .footer-meta a:hover { opacity: .8; }
+    .footer-meta a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 2px; }
+    .footer-copy { font-size: .78rem; color: rgba(255,255,255,.3); margin-top: 20px; }
+
+    /* ══════════════════════════════════════════
+       SECTION HEADER UTILITY
+    ══════════════════════════════════════════ */
+    .section-header .label { display: block; }
+
+    /* ══════════════════════════════════════════
+       FORM SUCCESS STATE
+    ══════════════════════════════════════════ */
+    .form-success {
+      display: none; text-align: center; padding: 40px 20px;
+      background: var(--white); border-radius: var(--radius);
+      border: 2px solid rgba(26,44,61,.1);
+    }
+    .form-success svg { width: 56px; height: 56px; margin: 0 auto 16px; }
+    .form-success h3 { color: var(--brown); margin-bottom: 10px; }
+    .form-success p { font-size: .9rem; }
+
+    /* ══════════════════════════════════════════
+       SKIP LINK (accessibility)
+    ══════════════════════════════════════════ */
+    .skip-link {
+      position: absolute; top: -100px; left: 0; z-index: 9999;
+      background: var(--gold); color: var(--brown); padding: 12px 24px;
+      font-weight: 700; transition: top .2s ease;
+    }
+    .skip-link:focus { top: 0; }
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Spring til indhold</a>
+
+<!-- ══════════════════════════════════════════
+     NAVIGATION
+══════════════════════════════════════════ -->
+<nav class="navbar" role="navigation" aria-label="Primær navigation">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" aria-label="Tolbods Gulvafslibning – hjem">
+      <img src="logo.jpg" alt="Tolbods Gulvafslibning" />
+    </a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="#ydelser">Ydelser</a></li>
+      <li><a href="#om-os">Om os</a></li>
+      <li><a href="#anmeldelser">Anmeldelser</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+      <li><a href="tel:52271271" class="nav-phone" aria-label="Ring til os: 52 27 12 71">52 27 12 71</a></li>
+      <li><a href="#kontakt" class="btn btn-primary nav-cta">Få gratis tilbud</a></li>
+    </ul>
+
+    <button class="burger" aria-label="Åbn menu" aria-expanded="false" aria-controls="nav-drawer">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav-drawer" id="nav-drawer" role="dialog" aria-label="Mobilmenu">
+    <ul>
+      <li><a href="#ydelser">Ydelser</a></li>
+      <li><a href="#om-os">Om os</a></li>
+      <li><a href="#anmeldelser">Anmeldelser</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+      <li><a href="tel:52271271" class="nav-phone" aria-label="Ring: 52 27 12 71">📞 52 27 12 71</a></li>
+    </ul>
+    <a href="#kontakt" class="btn btn-primary">Få gratis tilbud</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<main id="main">
+<section class="hero" aria-label="Forside">
+  <div class="hero-planks" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-inner">
+
+      <!-- LEFT: tekst -->
+      <div class="hero-content">
+
+        <div class="hero-badge fade-in">
+          <span class="stars" aria-label="5 stjerner">★★★★★</span>
+          <span>5 stjerner på Google</span>
+        </div>
+
+        <h1 class="fade-in delay-1">
+          Professionel gulvafslibning<br>
+          i <em>hele Danmark</em>
+        </h1>
+
+        <p class="hero-sub fade-in delay-2">
+          Med over 20 års erfaring inden for afslibning, lakering og lægning af trægulve leverer Kim Toldbod et resultat du kan se og mærke. Med base i Roslev arbejder Kim i hele Danmark – med hurtig opstart og et ærligt tilbud fra dag ét.
+        </p>
+
+        <div class="hero-ctas fade-in delay-3">
+          <a href="tel:52271271" class="btn btn-primary" aria-label="Ring til Kim Toldbod: 52 27 12 71">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 013.61 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 9.91a16 16 0 006.08 6.08l.97-.97a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            Ring til os: 52 27 12 71
+          </a>
+        </div>
+
+        <div class="trust-row fade-in delay-4" aria-label="Google-vurdering">
+          <svg width="32" height="32" viewBox="0 0 48 48" aria-hidden="true">
+            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+          </svg>
+          <div>
+            <span class="stars-lg" aria-hidden="true">★★★★★</span>
+            <p><strong>5.0 ud af 5</strong> på Google</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: mini kontaktformular -->
+      <div class="hero-form-card fade-in delay-2">
+        <h3>Få et gratis tilbud</h3>
+        <p class="form-sub">Uforpligtende · Kim svarer inden for 1 hverdagsdag</p>
+
+        <form id="hero-form" action="https://formspree.io/f/FORM_ID" method="POST" novalidate aria-label="Mini kontaktformular">
+          <div class="form-group">
+            <label for="h-navn">Navn *</label>
+            <input type="text" id="h-navn" name="navn" required autocomplete="name" placeholder="Dit fulde navn" aria-required="true" />
+          </div>
+          <div class="form-group">
+            <label for="h-telefon">Telefon *</label>
+            <input type="tel" id="h-telefon" name="telefon" required autocomplete="tel" placeholder="Fx 52 27 12 71" aria-required="true" />
+          </div>
+          <div class="form-group">
+            <label for="h-opgave">Type opgave</label>
+            <select id="h-opgave" name="opgave">
+              <option value="" disabled selected>Vælg type…</option>
+              <option>Gulvafslibning</option>
+              <option>Gulvlakering</option>
+              <option>Gulvoliering</option>
+              <option>Gulvlægning</option>
+              <option>Reparation</option>
+              <option>Andet</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="h-besked">Besked</label>
+            <textarea id="h-besked" name="besked" placeholder="Kort beskrivelse af din opgave…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-submit">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Send forespørgsel
+          </button>
+          <p class="form-note">Ingen binding · Svar hurtigst muligt</p>
+        </form>
+
+        <div class="form-success-mini" id="hero-success" role="alert" aria-live="polite">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1A2C3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <h4>Tak! Kim vender tilbage snarest.</h4>
+          <p>Typisk svar inden for én hverdagsdag.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SERVICES
+══════════════════════════════════════════ -->
+<section class="services" id="ydelser">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="label">Hvad vi tilbyder</span>
+      <h2>Vores ydelser</h2>
+      <p>Fra afslibning til lægning – vi klarer det hele professionelt og til fair priser.</p>
+    </div>
+
+    <div class="services-grid">
+
+      <!-- 1 Afslibning -->
+      <article class="service-card fade-in delay-1">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1A2C3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="9" rx="2"/><path d="M3 11l3-6h12l3 6"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="11" x2="9" y2="20"/><line x1="15" y1="11" x2="15" y2="20"/>
+          </svg>
+        </div>
+        <h3>Gulvafslibning &amp; Behandling af gulve</h3>
+        <p>Vi sliber alle typer trægulve og giver dem nyt liv – effektivt, støvfrit og med professionelt udstyr. Som en naturlig del af processen tilbyder vi også komplet overfladebehandling, så gulvet forberedes og beskyttes optimalt uanset om det efterfølgende lakeres, olies eller vokses.</p>
+      </article>
+
+      <!-- 2 Lakering -->
+      <article class="service-card fade-in delay-2">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1A2C3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"/><rect x="6" y="9" width="12" height="6" rx="1.5"/><circle cx="12" cy="12" r="1.5" fill="#1A2C3D" stroke="none"/>
+          </svg>
+        </div>
+        <h3>Opretning af gulv</h3>
+        <p>Ujævne og nedslidte gulve rettes op og bringes i vater igen. Vi sikrer en stabil, plan overflade som grundlag for en langtidsholdbar og flot efterbehandling.</p>
+      </article>
+
+      <!-- 3 Oliering -->
+      <article class="service-card fade-in delay-3">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1A2C3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><circle cx="7" cy="7" r="1.2" fill="#1A2C3D" stroke="none"/>
+          </svg>
+        </div>
+        <h3>Salg af gulve</h3>
+        <p>Vi forhandler et udvalg af kvalitetstræ gulve til både privat og erhverv. Få professionel rådgivning om materialevalg, så du finder det gulv der passer til dit hjem og budget.</p>
+      </article>
+
+      <!-- 4 Gulvlægning -->
+      <article class="service-card fade-in delay-4">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1A2C3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="9" height="9" rx="1"/><rect x="13" y="2" width="9" height="9" rx="1"/><rect x="2" y="13" width="9" height="9" rx="1"/><rect x="13" y="13" width="9" height="9" rx="1"/>
+          </svg>
+        </div>
+        <h3>Gulvlægning</h3>
+        <p>Lægning af nye trægulve, parket og plankegulve med præcision og et øje for detaljen.</p>
+      </article>
+
+      <!-- 5 Reparation -->
+      <article class="service-card fade-in delay-5">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1A2C3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+          </svg>
+        </div>
+        <h3>Reparation af trægulve</h3>
+        <p>Udbedring af skader, revner og slitage – vi bringer dit eksisterende gulv tilbage til topform.</p>
+      </article>
+
+      <!-- 6 Erhverv -->
+      <article class="service-card fade-in delay-1">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1A2C3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <h3>Erhverv &amp; privat</h3>
+        <p>Vi tager både små og store opgaver – fra det private hjem til erhvervslokaler. Kontakt os for et tilbud.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     PHOTO GALLERY
+══════════════════════════════════════════ -->
+<section class="photo-gallery" aria-hidden="true">
+  <div class="photo-gallery-grid">
+    <figure>
+      <img src="thanos-pal-61TfyNIrWmI-unsplash.jpg" alt="Trægulv closeup" loading="lazy" style="object-position: center bottom;" />
+    </figure>
+    <figure>
+      <img src="pexels-digitalbuggu-368755.jpg" alt="Slebet gulv i rum" loading="lazy" />
+    </figure>
+    <figure>
+      <img src="pexels-tihomir-trifonov-3106425-5225594.jpg" alt="Færdigt lakeret gulv" loading="lazy" />
+    </figure>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     WHY US
+══════════════════════════════════════════ -->
+<section class="whyus" id="hvorfor-os">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="label">Vores løfter</span>
+      <h2>Derfor vælger kunderne Kim Toldbod</h2>
+      <p>Mere end 20 år med tilfredse kunder over hele landet taler sit tydelige sprog.</p>
+    </div>
+
+    <div class="usp-grid">
+
+      <div class="usp-card fade-in delay-1">
+        <div class="usp-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </div>
+        <h3>5 stjerner på Google</h3>
+        <p>Kunderne taler for sig selv. En perfekt score opnået igennem konsekvent godt håndværk.</p>
+      </div>
+
+      <div class="usp-card fade-in delay-2">
+        <div class="usp-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+          </svg>
+        </div>
+        <h3>Leverer hvad han lover</h3>
+        <p>Ingen overraskelser. Kim giver et klart tilbud og holder det – både på pris og tid.</p>
+      </div>
+
+      <div class="usp-card fade-in delay-3">
+        <div class="usp-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+          </svg>
+        </div>
+        <h3>Base i Roslev – dækker hele Danmark</h3>
+        <p>Kim er til rådighed over hele landet. Uanset hvor du befinder dig, stiller han op med det samme engagement og den samme kvalitet.</p>
+      </div>
+
+      <div class="usp-card fade-in delay-4">
+        <div class="usp-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+          </svg>
+        </div>
+        <h3>Fair priser</h3>
+        <p>Du får altid et ærligt og konkurrencedygtigt tilbud. Ingen skjulte gebyrer, ingen spild af din tid.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     REVIEWS
+══════════════════════════════════════════ -->
+<section class="reviews" id="anmeldelser">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="label">Google anmeldelser</span>
+      <h2>Det siger vores kunder</h2>
+      <p>Ægte anmeldelser fra rigtige kunder – ingen filter, ingen redigering.</p>
+    </div>
+
+    <div class="reviews-grid">
+
+      <!-- Review 1 -->
+      <article class="review-card fade-in delay-1">
+        <div class="review-header">
+          <div class="review-avatar" aria-hidden="true">BB</div>
+          <div class="review-meta">
+            <h4>Brian Borg</h4>
+            <span class="stars" aria-label="5 stjerner">★★★★★</span>
+          </div>
+        </div>
+        <p class="review-text">"Rigtig flot arbejde de laver. Dygtige folk. Kan varmt anbefale Tolbods Gulvafslibning."</p>
+        <div class="review-badges">
+          <span class="badge">Kvalitet</span>
+          <span class="badge">Professionalisme</span>
+          <span class="badge">Priser</span>
+        </div>
+      </article>
+
+      <!-- Review 2 -->
+      <article class="review-card fade-in delay-2">
+        <div class="review-header">
+          <div class="review-avatar" aria-hidden="true">PH</div>
+          <div class="review-meta">
+            <h4>Peter Hawthorn</h4>
+            <span class="stars" aria-label="5 stjerner">★★★★★</span>
+          </div>
+        </div>
+        <p class="review-text">"Professionelle folk. Kim Toldbod leverer det han lover."</p>
+        <div class="review-badges">
+          <span class="badge">Professionalisme</span>
+          <span class="badge">Pålidelighed</span>
+        </div>
+      </article>
+
+      <!-- Review 3 -->
+      <article class="review-card fade-in delay-3">
+        <div class="review-header">
+          <div class="review-avatar" aria-hidden="true">KP</div>
+          <div class="review-meta">
+            <h4>Kenn Pedersen</h4>
+            <span class="stars" aria-label="5 stjerner">★★★★★</span>
+          </div>
+        </div>
+        <p class="review-text">"Fantastisk service og et flot resultat. Ville ikke tøve med at bruge dem igen."</p>
+        <div class="review-badges">
+          <span class="badge">Svartid</span>
+          <span class="badge">Kvalitet</span>
+          <span class="badge">Professionalisme</span>
+          <span class="badge">Priser</span>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="reviews-footer fade-in">
+      <a
+        href="https://www.google.com/maps/search/Tolbods+Gulvafslibning"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="google-link"
+        aria-label="Se alle anmeldelser på Google (åbner i nyt vindue)"
+      >
+        <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true">
+          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+          <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+        </svg>
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        Se os på Google · 5 stjerner
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     ABOUT
+══════════════════════════════════════════ -->
+<section class="about" id="om-os">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-text fade-in">
+        <span class="label">Om virksomheden</span>
+        <h2>Mød Kim Toldbod</h2>
+        <p>
+          Kim er en erfaren gulvmand med base i Roslev. Han er kendt for at levere præcis det han lover
+          – hverken mere eller mindre. Med mange års erfaring i gulvafslibning og -lægning garanterer
+          han et resultat du bliver glad for.
+        </p>
+        <p>
+          Med base i Roslev betjener Kim private boligejere og erhvervskunder i hele Danmark. Uanset opgavens størrelse eller beliggenhed møder du den samme faglige stolthed, hurtige opstart og personlige engagement fra første dag.
+        </p>
+        <p>
+          Har du spørgsmål til din opgave, er du altid velkommen til at ringe. Kim tager telefonen
+          og giver dig en ærlig vurdering – uden forpligtelse.
+        </p>
+        <a href="tel:52271271" class="btn btn-brown" style="margin-top:24px;" aria-label="Ring til Kim: 52 27 12 71">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 013.61 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 9.91a16 16 0 006.08 6.08l.97-.97a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          Ring: 52 27 12 71
+        </a>
+      </div>
+
+      <div class="about-img fade-in delay-2">
+        <img src="Kim.jpg" alt="Kim Toldbod – indehaver af Tolbods Gulvafslibning" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CTA BANNER
+══════════════════════════════════════════ -->
+<div class="cta-banner" role="complementary" aria-label="Opfordring til handling">
+  <div class="cta-banner-inner fade-in">
+    <h2>Skal dine gulve have nyt liv?</h2>
+    <p>Ring eller udfyld formularen herunder – Kim vender tilbage hurtigst muligt med et uforpligtende tilbud.</p>
+    <div class="btns">
+      <a href="tel:52271271" class="btn btn-primary" aria-label="Ring til os nu: 52 27 12 71">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 013.61 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 9.91a16 16 0 006.08 6.08l.97-.97a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Ring nu · 52 27 12 71
+      </a>
+      <a href="#kontakt" class="btn btn-outline">
+        Skriv til os
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CONTACT
+══════════════════════════════════════════ -->
+<section class="contact" id="kontakt">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="label">Kontakt os</span>
+      <h2>Få et uforpligtende tilbud</h2>
+      <p>Beskriv din opgave, så vender Kim tilbage hurtigst muligt.</p>
+    </div>
+
+    <div class="contact-inner">
+
+      <!-- Form -->
+      <div class="fade-in delay-1">
+        <form
+          id="contact-form"
+          action="https://formspree.io/f/FORM_ID"
+          method="POST"
+          novalidate
+          aria-label="Kontaktformular"
+        >
+          <div class="form-group">
+            <label for="navn">Navn <span aria-hidden="true">*</span></label>
+            <input type="text" id="navn" name="navn" autocomplete="name" required placeholder="Dit fulde navn" aria-required="true" />
+          </div>
+
+          <div class="form-group">
+            <label for="telefon">Telefon <span aria-hidden="true">*</span></label>
+            <input type="tel" id="telefon" name="telefon" autocomplete="tel" required placeholder="Fx 52 27 12 71" aria-required="true" />
+          </div>
+
+          <div class="form-group">
+            <label for="email">E-mail <span aria-hidden="true">*</span></label>
+            <input type="email" id="email" name="email" autocomplete="email" required placeholder="din@email.dk" aria-required="true" />
+          </div>
+
+          <div class="form-group">
+            <label for="opgave">Type opgave</label>
+            <select id="opgave" name="opgave" aria-label="Vælg type opgave">
+              <option value="" disabled selected>Vælg type opgave…</option>
+              <option value="Gulvafslibning">Gulvafslibning</option>
+              <option value="Gulvlakering">Gulvlakering</option>
+              <option value="Gulvoliering">Gulvoliering</option>
+              <option value="Gulvlægning">Gulvlægning</option>
+              <option value="Reparation">Reparation</option>
+              <option value="Andet">Andet</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="besked">Beskriv din opgave</label>
+            <textarea id="besked" name="besked" placeholder="Fortæl kort om dit gulv – type, areal, tilstand, ønsket resultat…" aria-label="Beskrivelse af opgaven"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary form-submit">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Send forespørgsel
+          </button>
+          <p class="form-note">Uforpligtende · Svar inden for 1 hverdagsdag</p>
+        </form>
+
+        <div class="form-success" id="form-success" role="alert" aria-live="polite">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1A2C3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <h3>Tak for din besked!</h3>
+          <p>Kim vender tilbage hurtigst muligt – typisk inden for én hverdagsdag.</p>
+        </div>
+      </div>
+
+      <!-- Contact info -->
+      <div class="contact-info fade-in delay-2" aria-label="Kontaktoplysninger">
+        <h3>Kontaktoplysninger</h3>
+
+        <div class="contact-detail">
+          <div class="detail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="detail-text">
+            <small>Adresse</small>
+            <span>Højgade 4, 7870 Roslev</span>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="detail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 013.61 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 9.91a16 16 0 006.08 6.08l.97-.97a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div class="detail-text">
+            <small>Telefon</small>
+            <a href="tel:52271271" aria-label="Ring til os: 52 27 12 71">52 27 12 71</a>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="detail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="detail-text">
+            <small>E-mail</small>
+            <a href="mailto:tolbod2008@hotmail.com" aria-label="Send mail til tolbod2008@hotmail.com">tolbod2008@hotmail.com</a>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="detail-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
+          </div>
+          <div class="detail-text">
+            <small>CVR-nummer</small>
+            <span>36206721</span>
+          </div>
+        </div>
+
+        <hr class="contact-info-divider" />
+
+        <div class="contact-stars">
+          <span class="stars" aria-label="5 stjerner på Google">★★★★★</span>
+          <span>5 stjerner på Google</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-logo"><img src="logo.jpg" alt="Tolbods Gulvafslibning" /></div>
+    <p class="footer-meta">
+      CVR: 36206721 &nbsp;·&nbsp; Højgade 4, 7870 Roslev &nbsp;·&nbsp;
+      <a href="tel:52271271" aria-label="Ring: 52 27 12 71">52 27 12 71</a> &nbsp;·&nbsp;
+      <a href="mailto:tolbod2008@hotmail.com" aria-label="Mail: tolbod2008@hotmail.com">tolbod2008@hotmail.com</a>
+    </p>
+    <p class="footer-copy">© 2026 Tolbods Gulvafslibning – Alle rettigheder forbeholdes</p>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ── Burger menu ── */
+  const burger = document.querySelector('.burger');
+  const drawer = document.querySelector('.nav-drawer');
+
+  burger.addEventListener('click', function () {
+    const open = drawer.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+  });
+
+  /* Close drawer on link click */
+  drawer.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      drawer.classList.remove('open');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  /* Close drawer on outside click */
+  document.addEventListener('click', function (e) {
+    if (!drawer.contains(e.target) && !burger.contains(e.target)) {
+      drawer.classList.remove('open');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  /* ── Intersection Observer: fade-in on scroll ── */
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05 });
+
+  document.querySelectorAll('.fade-in').forEach(function (el) {
+    io.observe(el);
+  });
+
+  /* ── Smooth scroll for anchor links ── */
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        /* Shift focus for accessibility */
+        target.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
+      }
+    });
+  });
+
+  /* ── Hero mini-form ── */
+  var heroForm    = document.getElementById('hero-form');
+  var heroSuccess = document.getElementById('hero-success');
+  if (heroForm) {
+    heroForm.addEventListener('submit', function (e) {
+      if (!heroForm.checkValidity()) { e.preventDefault(); heroForm.reportValidity(); return; }
+      if (heroForm.action.includes('FORM_ID')) {
+        e.preventDefault();
+        heroForm.style.display = 'none';
+        heroSuccess.style.display = 'block';
+      }
+    });
+  }
+
+  /* ── Form: HTML5 validation + success state ── */
+  var form    = document.getElementById('contact-form');
+  var success = document.getElementById('form-success');
+
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      if (!form.checkValidity()) {
+        e.preventDefault();
+        form.reportValidity();
+        return;
+      }
+
+      /* If using Formspree with real FORM_ID, let it submit normally.
+         For demo: intercept and show success message. */
+      if (form.action.includes('FORM_ID')) {
+        e.preventDefault();
+        form.style.display = 'none';
+        success.style.display = 'block';
+      }
+    });
+  }
+
+  /* ── Sticky navbar: subtle shadow on scroll ── */
+  var navbar = document.querySelector('.navbar');
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 10) {
+      navbar.style.boxShadow = '0 2px 16px rgba(26,44,61,.18)';
+    } else {
+      navbar.style.boxShadow = '0 2px 12px rgba(26,44,61,.12)';
+    }
+  }, { passive: true });
+
+})();
+</script>
+</body>
+</html>
